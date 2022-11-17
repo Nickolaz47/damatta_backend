@@ -4,16 +4,26 @@ import express from "express";
 import config from "config";
 // Logger
 import Logger from "../config/logger";
+// DB
+import sequelize from "../db/conn";
 // Middlewares
 import morganMiddleware from "../middlewares/morgan";
 
 const app = express();
 
 app.use(express.json());
-app.use(morganMiddleware)
+app.use(morganMiddleware);
 
 const port = config.get<number>("port");
 
-app.listen(port, async () => {
-  Logger.info(`🚀 App rodando na porta ${port}.`);
-});
+sequelize
+  .sync()
+  .then(() => {
+    Logger.info("Conectado ao MySQL.");
+    app.listen(port, async () => {
+      Logger.info(`🚀 App rodando na porta ${port}.`);
+    });
+  })
+  .catch((err) => {
+    Logger.error(err);
+  });
