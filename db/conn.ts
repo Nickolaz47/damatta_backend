@@ -34,7 +34,7 @@ mysql
   .then((connection) => {
     connection
       .query(`CREATE DATABASE IF NOT EXISTS ${dbName}`)
-      .then((res) => {
+      .then(() => {
         connection.end();
       })
       .catch((err) => Logger.error(err));
@@ -45,7 +45,7 @@ const sequelize = new Sequelize(
   dbName,
   connectionConfig.user,
   connectionConfig.password,
-  { host: connectionConfig.uri, dialect: "mysql" }
+  { host: connectionConfig.uri, dialect: "mysql", logging: false }
 );
 
 export default sequelize;

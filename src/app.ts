@@ -6,6 +6,8 @@ import config from "config";
 import Logger from "../config/logger";
 // DB
 import sequelize from "../db/conn";
+// Models
+import Rent from "../models/Rent";
 // Middlewares
 import morganMiddleware from "../middlewares/morgan";
 
