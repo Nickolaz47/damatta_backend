@@ -11,4 +11,6 @@ export default {
   prodDbUri: process.env.PROD_DB_URI,
   prodDbUser: process.env.PROD_DB_USER,
   prodDbPassword: process.env.PROD_DB_PASSWORD,
+  jwtAccessSecret: process.env.JWT_ACCESS_SECRET,
+  jwtRefreshSecret: process.env.JWT_REFRESH_SECRET,
 };
