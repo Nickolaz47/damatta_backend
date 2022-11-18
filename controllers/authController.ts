@@ -14,7 +14,7 @@ const register = async (req: Request, res: Response) => {
   const checkIfUserExists = await User.findOne({ where: { name } });
 
   if (checkIfUserExists) {
-    res.status(409).json({ errors: ["O nome já está em uso."] });
+    return res.status(409).json({ errors: ["O nome já está em uso."] });
   }
 
   const hashedPassword = encryptData(password);

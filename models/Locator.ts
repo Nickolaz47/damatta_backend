@@ -2,7 +2,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
 // Models
-import Rent from "./Rent";
+import User from "./User";
 
 const Locator = sequelize.define("Locator", {
   id: {
@@ -21,7 +21,7 @@ const Locator = sequelize.define("Locator", {
   },
 });
 
-Locator.hasMany(Rent);
-Rent.belongsTo(Locator);
+Locator.belongsTo(User)
+User.hasMany(Locator)
 
 export default Locator;
