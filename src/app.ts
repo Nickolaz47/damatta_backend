@@ -13,11 +13,15 @@ import Renter from "../models/Renter";
 import User from "../models/User";
 // Middlewares
 import morganMiddleware from "../middlewares/morgan";
+// Routes
+import authRouter from "../routes/authRouter";
 
 const app = express();
 
 app.use(express.json());
 app.use(morganMiddleware);
+
+app.use("/", authRouter);
 
 const port = config.get<number>("port");
 
