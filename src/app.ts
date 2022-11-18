@@ -10,6 +10,7 @@ import sequelize from "../db/conn";
 import Rent from "../models/Rent";
 import Locator from "../models/Locator";
 import Renter from "../models/Renter";
+import User from "../models/User";
 // Middlewares
 import morganMiddleware from "../middlewares/morgan";
 
