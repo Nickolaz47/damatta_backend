@@ -12,6 +12,8 @@ import Locator from "../models/Locator";
 import Renter from "../models/Renter";
 import User from "../models/User";
 // Middlewares
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import morganMiddleware from "../middlewares/morgan";
 // Routes
 import authRouter from "../routes/authRouter";
@@ -19,6 +21,8 @@ import authRouter from "../routes/authRouter";
 const app = express();
 
 app.use(express.json());
+app.use(cors({ origin: config.get("devFrontUrl"), credentials: true }));
+app.use(cookieParser());
 app.use(morganMiddleware);
 
 app.use("/", authRouter);
