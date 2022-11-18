@@ -7,7 +7,7 @@ import config from "config";
 import Logger from "../config/logger";
 
 const dbName: string = "damatta";
-const env = config.get("env");
+const env: string = config.get("env");
 
 const connectionConfig = {
   user:

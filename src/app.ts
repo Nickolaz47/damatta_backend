@@ -8,6 +8,8 @@ import Logger from "../config/logger";
 import sequelize from "../db/conn";
 // Models
 import Rent from "../models/Rent";
+import Locator from "../models/Locator";
+import Renter from "../models/Renter";
 // Middlewares
 import morganMiddleware from "../middlewares/morgan";
 
