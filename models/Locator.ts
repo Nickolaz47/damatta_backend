@@ -3,8 +3,10 @@ import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
 // Models
 import User from "./User";
+// Interfaces
+import { LocatorInterface } from "./interfaces/Locator";
 
-const Locator = sequelize.define("Locator", {
+const Locator = sequelize.define<LocatorInterface>("Locator", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -21,7 +23,7 @@ const Locator = sequelize.define("Locator", {
   },
 });
 
-Locator.belongsTo(User)
-User.hasMany(Locator)
+Locator.belongsTo(User);
+User.hasMany(Locator);
 
 export default Locator;

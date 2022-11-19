@@ -3,8 +3,10 @@ import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
 // Models
 import Rent from "./Rent";
+// Interfaces
+import { RenterInterface } from "./interfaces/Renter";
 
-const Renter = sequelize.define("Renter", {
+const Renter = sequelize.define<RenterInterface>("Renter", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -17,6 +19,6 @@ const Renter = sequelize.define("Renter", {
   },
 });
 
-Renter.belongsTo(Rent)
+Renter.belongsTo(Rent);
 
 export default Renter;
