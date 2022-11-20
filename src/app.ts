@@ -17,6 +17,7 @@ import cookieParser from "cookie-parser";
 import morganMiddleware from "../middlewares/morgan";
 // Routes
 import authRouter from "../routes/authRouter";
+import tokenRouter from "../routes/tokenRouter";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(morganMiddleware);
 
 app.use("/", authRouter);
+app.use("/token", tokenRouter);
 
 const port = config.get<number>("port");
 
