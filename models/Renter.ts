@@ -2,7 +2,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
 // Models
-import Rent from "./Rent";
+import User from "./User";
 // Interfaces
 import { RenterInterface } from "./interfaces/Renter";
 
@@ -19,6 +19,7 @@ const Renter = sequelize.define<RenterInterface>("Renter", {
   },
 });
 
-Renter.belongsTo(Rent);
+Renter.belongsTo(User);
+User.hasMany(Renter);
 
 export default Renter;
