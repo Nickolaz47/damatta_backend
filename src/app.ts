@@ -19,6 +19,7 @@ import morganMiddleware from "../middlewares/morgan";
 import authRouter from "../routes/authRouter";
 import tokenRouter from "../routes/tokenRouter";
 import locatorRouter from "../routes/locatorRouter";
+import renterRouter from "../routes/renterRouter";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(morganMiddleware);
 app.use("/", authRouter);
 app.use("/token", tokenRouter);
 app.use("/locators", locatorRouter);
+app.use("/renters", renterRouter);
 
 const port = config.get<number>("port");
 

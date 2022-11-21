@@ -18,7 +18,7 @@ const Renter = sequelize.define<RenterInterface>("Renter", {
     allowNull: false,
   },
   UserId: {
-    type: DataTypes.UUIDV4,
+    type: DataTypes.UUID,
     allowNull: false,
   },
 });

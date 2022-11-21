@@ -22,7 +22,7 @@ const Locator = sequelize.define<LocatorInterface>("Locator", {
     allowNull: false,
   },
   UserId: {
-    type: DataTypes.UUIDV4,
+    type: DataTypes.UUID,
     allowNull: false
   }
 });
