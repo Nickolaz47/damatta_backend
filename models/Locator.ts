@@ -18,9 +18,13 @@ const Locator = sequelize.define<LocatorInterface>("Locator", {
     allowNull: false,
   },
   rentNumbers: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
+  UserId: {
+    type: DataTypes.UUIDV4,
+    allowNull: false
+  }
 });
 
 Locator.belongsTo(User);

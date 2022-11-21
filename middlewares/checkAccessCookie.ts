@@ -1,20 +1,14 @@
 // Types
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 // Config
 import config from "config";
 // Models
-import User from "../models/User.js";
+import User from "../models/User";
 // Auth
 import jwt from "jsonwebtoken";
-// Interfaces
-import { UserInterface } from "../models/interfaces/User";
 
-interface RequestWithUser extends Request {
-  user: UserInterface | null;
-}
-
-const checkCookie = async (
-  req: RequestWithUser,
+const checkCookie: RequestHandler = async (
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

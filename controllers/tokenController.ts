@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import config from "config";
 // Auth
 import jwt from "jsonwebtoken";
-import { generateAccessToken } from "../auth/token.js";
+import { generateAccessToken } from "../auth/token";
 
 const refreshToken = async (req: Request, res: Response) => {
   const { cookies } = req;
