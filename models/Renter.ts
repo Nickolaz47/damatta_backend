@@ -17,6 +17,10 @@ const Renter = sequelize.define<RenterInterface>("Renter", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  UserId: {
+    type: DataTypes.UUIDV4,
+    allowNull: false,
+  },
 });
 
 Renter.belongsTo(User);

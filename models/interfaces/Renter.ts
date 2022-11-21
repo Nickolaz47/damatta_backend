@@ -12,4 +12,5 @@ export interface RenterInterface
   > {
   id: CreationOptional<string>;
   name: string;
+  UserId: string;
 }

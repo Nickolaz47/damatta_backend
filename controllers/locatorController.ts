@@ -7,10 +7,6 @@ import User from "../models/User";
 const getLocators = async (req: Request, res: Response) => {
   const { user } = req;
 
-  if (!user) {
-    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
-  }
-
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
@@ -28,10 +24,6 @@ const createLocator = async (req: Request, res: Response) => {
   const { user } = req;
   const { name } = req.body;
 
-  if (!user) {
-    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
-  }
-
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
@@ -48,10 +40,6 @@ const updateLocator = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  if (!user) {
-    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
-  }
-
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
@@ -59,7 +47,6 @@ const updateLocator = async (req: Request, res: Response) => {
 
   const locatorToUpdate = await Locator.findOne({
     where: { id, UserId: user.id },
-    attributes: { exclude: ["password"] },
   });
 
   if (!locatorToUpdate) {
@@ -77,10 +64,6 @@ const deleteLocator = async (req: Request, res: Response) => {
   const { user } = req;
   const { id } = req.params;
 
-  if (!user) {
-    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
-  }
-
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
@@ -88,7 +71,6 @@ const deleteLocator = async (req: Request, res: Response) => {
 
   const locatorToDelete = await Locator.findOne({
     where: { id, UserId: user.id },
-    attributes: { exclude: ["password"] },
   });
 
   if (!locatorToDelete) {
