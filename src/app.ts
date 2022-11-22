@@ -11,6 +11,7 @@ import Rent from "../models/Rent";
 import Locator from "../models/Locator";
 import Renter from "../models/Renter";
 import User from "../models/User";
+import Sale from "../models/Sale";
 // Middlewares
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -20,6 +21,7 @@ import authRouter from "../routes/authRouter";
 import tokenRouter from "../routes/tokenRouter";
 import locatorRouter from "../routes/locatorRouter";
 import renterRouter from "../routes/renterRouter";
+import saleRouter from "../routes/saleRouter";
 
 const app = express();
 
@@ -32,6 +34,7 @@ app.use("/", authRouter);
 app.use("/token", tokenRouter);
 app.use("/locators", locatorRouter);
 app.use("/renters", renterRouter);
+app.use("/sales", saleRouter);
 
 const port = config.get<number>("port");
 
