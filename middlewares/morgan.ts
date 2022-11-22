@@ -3,7 +3,7 @@ import config from "config";
 import Logger from "../config/logger";
 
 const stream: StreamOptions = {
-  write: (message) => Logger.http(message),
+  write: (message) => Logger.http(message.trim()),
 };
 
 const skip = (): boolean => {
