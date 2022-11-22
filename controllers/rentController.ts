@@ -56,24 +56,28 @@ const updateRent = async (req: Request, res: Response) => {
   const { user } = req;
   const { id } = req.params;
   const { value, dueDate, payday, LocatorId, RenterId } = req.body;
-
+  console.log(user);
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const locatorExists = await Locator.findOne({
-    where: { id: LocatorId, UserId: user.id },
-  });
-  if (!locatorExists) {
-    res.status(404).json({ errors: ["Locador não encontrado!"] });
+  if (LocatorId) {
+    const locatorExists = await Locator.findOne({
+      where: { id: LocatorId, UserId: user.id },
+    });
+    if (!locatorExists) {
+      res.status(404).json({ errors: ["Locador não encontrado!"] });
+    }
   }
 
-  const renterExists = await Renter.findOne({
-    where: { id: RenterId, UserId: user.id },
-  });
-  if (!renterExists) {
-    res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+  if (RenterId) {
+    const renterExists = await Renter.findOne({
+      where: { id: RenterId, UserId: user.id },
+    });
+    if (!renterExists) {
+      res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+    }
   }
 
   const rentToUpdate = await Rent.findOne({ where: { id, UserId: user.id } });
