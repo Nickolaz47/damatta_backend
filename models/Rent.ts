@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
 // Models
 import Locator from "./Locator";
+import Renter from "./Renter";
 import User from "./User";
 
 const Rent = sequelize.define("Rent", {
@@ -24,6 +25,18 @@ const Rent = sequelize.define("Rent", {
     type: DataTypes.DATE,
     allowNull: true,
   },
+  LocatorId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  RenterId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  UserId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 Rent.belongsTo(User);
@@ -31,5 +44,8 @@ User.hasMany(Rent);
 
 Rent.belongsTo(Locator);
 Locator.hasMany(Rent);
+
+Rent.belongsTo(Renter)
+Renter.hasMany(Rent)
 
 export default Rent;

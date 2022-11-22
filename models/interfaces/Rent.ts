@@ -14,4 +14,7 @@ export interface RentInterface
   value: number;
   dueDate: Date;
   payday: CreationOptional<Date>;
+  LocatorId: string;
+  RenterId: string;
+  UserId: string;
 }
