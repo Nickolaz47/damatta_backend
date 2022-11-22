@@ -11,7 +11,7 @@ const getRents = async (req: Request, res: Response) => {
 
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
-    res.status(404).json({ errors: ["Usuário não encontrado!"] });
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
   const rentsData = await Rent.findAll({
@@ -36,18 +36,24 @@ const createRent = async (req: Request, res: Response) => {
     where: { id: LocatorId, UserId: user.id },
   });
   if (!locatorExists) {
-    res.status(404).json({ errors: ["Locador não encontrado!"] });
+    return res.status(404).json({ errors: ["Locador não encontrado!"] });
   }
 
   const renterExists = await Renter.findOne({
     where: { id: RenterId, UserId: user.id },
   });
   if (!renterExists) {
-    res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+    return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
   }
 
   const rent = { value, dueDate, payday, LocatorId, RenterId, UserId: user.id };
   const newRent = await Rent.create(rent);
+
+  const rentNumbers = await Rent.count({
+    where: { UserId: user.id, LocatorId },
+  });
+
+  await locatorExists.update({ rentNumbers });
 
   return res.status(201).json({ rent: newRent });
 };
@@ -59,7 +65,7 @@ const updateRent = async (req: Request, res: Response) => {
   console.log(user);
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
-    res.status(404).json({ errors: ["Usuário não encontrado!"] });
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
   if (LocatorId) {
@@ -67,7 +73,7 @@ const updateRent = async (req: Request, res: Response) => {
       where: { id: LocatorId, UserId: user.id },
     });
     if (!locatorExists) {
-      res.status(404).json({ errors: ["Locador não encontrado!"] });
+      return res.status(404).json({ errors: ["Locador não encontrado!"] });
     }
   }
 
@@ -76,7 +82,7 @@ const updateRent = async (req: Request, res: Response) => {
       where: { id: RenterId, UserId: user.id },
     });
     if (!renterExists) {
-      res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+      return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
     }
   }
 
@@ -96,7 +102,7 @@ const deleteRent = async (req: Request, res: Response) => {
 
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
-    res.status(404).json({ errors: ["Usuário não encontrado!"] });
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
   const rentToDelete = await Rent.findOne({ where: { id, UserId: user.id } });
