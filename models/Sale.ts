@@ -22,11 +22,11 @@ const Sale = sequelize.define<SaleInterface>("Sale", {
     allowNull: false,
   },
   value: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   commission: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   agent: {
