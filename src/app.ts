@@ -22,6 +22,7 @@ import tokenRouter from "../routes/tokenRouter";
 import locatorRouter from "../routes/locatorRouter";
 import renterRouter from "../routes/renterRouter";
 import saleRouter from "../routes/saleRouter";
+import rentRouter from "../routes/rentRouter";
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/token", tokenRouter);
 app.use("/locators", locatorRouter);
 app.use("/renters", renterRouter);
 app.use("/sales", saleRouter);
+app.use("/rents", rentRouter);
 
 const port = config.get<number>("port");
 

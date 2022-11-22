@@ -14,7 +14,7 @@ const Rent = sequelize.define("Rent", {
     primaryKey: true,
   },
   value: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   dueDate: {
@@ -46,6 +46,6 @@ Rent.belongsTo(Locator);
 Locator.hasMany(Rent);
 
 Rent.belongsTo(Renter)
-Renter.hasMany(Rent)
+Renter.hasOne(Rent)
 
 export default Rent;
