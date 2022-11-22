@@ -23,8 +23,8 @@ const Locator = sequelize.define<LocatorInterface>("Locator", {
   },
   UserId: {
     type: DataTypes.UUID,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 Locator.belongsTo(User);
