@@ -10,6 +10,7 @@ import validate from "../middlewares/handleValidation";
 const saleRouter = Router();
 
 saleRouter.get("/get", checkCookie, saleController.getSales);
+saleRouter.get("/:id", checkCookie, saleController.getSaleById);
 saleRouter.post(
   "/create",
   checkCookie,

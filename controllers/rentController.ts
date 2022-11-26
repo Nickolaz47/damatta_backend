@@ -23,6 +23,23 @@ const getRents = async (req: Request, res: Response) => {
   return res.json({ rents });
 };
 
+const getRentById = async (req: Request, res: Response) => {
+  const { user } = req;
+  const { id } = req.params;
+
+  const userExists = await User.findOne({ where: { id: user.id } });
+  if (!userExists) {
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
+  }
+
+  const rent = await Rent.findOne({ where: { id, UserId: user.id } });
+  if (!rent) {
+    return res.status(404).json({ errors: ["Aluguel não encontrado!"] });
+  }
+
+  return res.json({ rent });
+};
+
 const createRent = async (req: Request, res: Response) => {
   const { user } = req;
   const { value, dueDate, payday, LocatorId, RenterId } = req.body;
@@ -115,5 +132,11 @@ const deleteRent = async (req: Request, res: Response) => {
   return res.json({ rent: rentToDelete });
 };
 
-const rentController = { getRents, createRent, updateRent, deleteRent };
+const rentController = {
+  getRents,
+  getRentById,
+  createRent,
+  updateRent,
+  deleteRent,
+};
 export default rentController;

@@ -10,6 +10,7 @@ import validate from "../middlewares/handleValidation";
 const rentRouter = Router();
 
 rentRouter.get("/get", checkCookie, rentController.getRents);
+rentRouter.get("/:id", checkCookie, rentController.getRentById);
 rentRouter.post(
   "/create",
   checkCookie,
