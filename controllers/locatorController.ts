@@ -20,6 +20,23 @@ const getLocators = async (req: Request, res: Response) => {
   return res.json({ locators });
 };
 
+const getLocatorById = async (req: Request, res: Response) => {
+  const { user } = req;
+  const { id } = req.params;
+
+  const userExists = await User.findOne({ where: { id: user.id } });
+  if (!userExists) {
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
+  }
+
+  const locator = Locator.findOne({ where: { id, UserId: user.id } });
+  if (!locator) {
+    return res.status(404).json({ errors: ["Locador não encontrado!"] });
+  }
+
+  return res.json({ locator });
+};
+
 const createLocator = async (req: Request, res: Response) => {
   const { user } = req;
   const { name } = req.body;
@@ -84,6 +101,7 @@ const deleteLocator = async (req: Request, res: Response) => {
 
 const locatorController = {
   getLocators,
+  getLocatorById,
   createLocator,
   updateLocator,
   deleteLocator,

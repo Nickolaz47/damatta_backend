@@ -10,6 +10,7 @@ import validate from "../middlewares/handleValidation";
 const locatorRouter = Router();
 
 locatorRouter.get("/get", checkCookie, locatorController.getLocators);
+locatorRouter.get("/:id", checkCookie, locatorController.getLocatorById);
 locatorRouter.post(
   "/create",
   checkCookie,
