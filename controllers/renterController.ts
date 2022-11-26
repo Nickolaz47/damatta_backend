@@ -20,6 +20,23 @@ const getRenters = async (req: Request, res: Response) => {
   return res.json({ renters });
 };
 
+const getRenterById = async (req: Request, res: Response) => {
+  const { user } = req;
+  const { id } = req.params;
+
+  const userExists = await User.findOne({ where: { id: user.id } });
+  if (!userExists) {
+    return res.status(404).json({ errors: ["Usuário não encontrado!"] });
+  }
+
+  const renter = await Renter.findOne({ where: { id, UserId: user.id } });
+  if (!renter) {
+    return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+  }
+
+  return res.json({ renter });
+};
+
 const createRenter = async (req: Request, res: Response) => {
   const { user } = req;
   const { name } = req.body;
@@ -82,6 +99,7 @@ const deleteRenter = async (req: Request, res: Response) => {
 
 const renterController = {
   getRenters,
+  getRenterById,
   createRenter,
   updateRenter,
   deleteRenter,

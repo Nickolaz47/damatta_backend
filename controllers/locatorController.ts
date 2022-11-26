@@ -29,7 +29,7 @@ const getLocatorById = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const locator = Locator.findOne({ where: { id, UserId: user.id } });
+  const locator = await Locator.findOne({ where: { id, UserId: user.id } });
   if (!locator) {
     return res.status(404).json({ errors: ["Locador não encontrado!"] });
   }
