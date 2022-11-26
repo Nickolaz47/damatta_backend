@@ -23,7 +23,7 @@ const checkCookie: RequestHandler = async (
 
   jwt.verify(accessToken, accessSecret, async (err: any, user: any) => {
     if (err instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ errors: ["Access token expirado!"] });
+      return res.status(403).json({ errors: ["Access token expirado!"] });
     }
 
     try {
