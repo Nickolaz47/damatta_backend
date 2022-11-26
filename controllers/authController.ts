@@ -74,8 +74,7 @@ const login = async (req: Request, res: Response) => {
 };
 
 const logout = (req: Request, res: Response) => {
-  res.clearCookie("authAccessCookie");
-  res.clearCookie("authRefreshCookie");
+  res.clearCookie("authAccessCookie").clearCookie("authRefreshCookie");
 
   return res.json({ auth: false });
 };
