@@ -21,6 +21,7 @@ const saleCreateValidation = () => {
       .withMessage("O nome do corretor é obrigatório.")
       .isLength({ min: 5 })
       .withMessage("O nome do corretor precisa de no mínimo 5 caracteres."),
+    body("date").isDate().withMessage("A data de venda é obrigatória!"),
   ];
 };
 
@@ -52,6 +53,10 @@ const saleUpdateValidation = () => {
       .withMessage("O nome do corretor é obrigatório.")
       .isLength({ min: 5 })
       .withMessage("O nome do corretor precisa de no mínimo 5 caracteres."),
+    body("date")
+      .optional()
+      .isDate()
+      .withMessage("A data de venda é obrigatória!"),
   ];
 };
 
