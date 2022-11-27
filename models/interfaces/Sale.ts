@@ -16,5 +16,6 @@ export interface SaleInterface
   value: number;
   commission: number;
   agent: string;
+  date: Date;
   UserId: string;
 }

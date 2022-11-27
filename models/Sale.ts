@@ -33,6 +33,10 @@ const Sale = sequelize.define<SaleInterface>("Sale", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
   UserId: {
     type: DataTypes.UUID,
     allowNull: false,

@@ -36,14 +36,22 @@ const getSaleById = async (req: Request, res: Response) => {
 
 const createSale = async (req: Request, res: Response) => {
   const { user } = req;
-  const { seller, buyer, value, commission, agent } = req.body;
+  const { seller, buyer, value, commission, agent, date } = req.body;
 
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const sale = { seller, buyer, value, commission, agent, UserId: user.id };
+  const sale = {
+    seller,
+    buyer,
+    value,
+    commission,
+    agent,
+    date,
+    UserId: user.id,
+  };
   const newSale = await Sale.create(sale);
 
   return res.status(201).json(newSale);
@@ -52,7 +60,7 @@ const createSale = async (req: Request, res: Response) => {
 const updateSale = async (req: Request, res: Response) => {
   const { user } = req;
   const { id } = req.params;
-  const { seller, buyer, value, commission, agent } = req.body;
+  const { seller, buyer, value, commission, agent, date } = req.body;
 
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
@@ -64,7 +72,7 @@ const updateSale = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Venda não encontrada!"] });
   }
 
-  await saleToUpdate.update({ seller, buyer, value, commission, agent });
+  await saleToUpdate.update({ seller, buyer, value, commission, agent, date });
 
   return res.json(saleToUpdate);
 };
