@@ -17,7 +17,7 @@ const getLocators = async (req: Request, res: Response) => {
     raw: true,
   });
 
-  return res.json({ locators });
+  return res.json(locators);
 };
 
 const getLocatorById = async (req: Request, res: Response) => {
@@ -34,7 +34,7 @@ const getLocatorById = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Locador não encontrado!"] });
   }
 
-  return res.json({ locator });
+  return res.json(locator);
 };
 
 const createLocator = async (req: Request, res: Response) => {
@@ -49,7 +49,7 @@ const createLocator = async (req: Request, res: Response) => {
   const locator = { name, rentNumbers: 0, UserId: user.id };
   const newLocator = await Locator.create(locator);
 
-  return res.status(201).json({ locator: newLocator });
+  return res.status(201).json(newLocator);
 };
 
 const updateLocator = async (req: Request, res: Response) => {
@@ -74,7 +74,7 @@ const updateLocator = async (req: Request, res: Response) => {
 
   const updatedLocator = locatorToUpdate;
 
-  return res.json({ locator: updatedLocator });
+  return res.json(updatedLocator);
 };
 
 const deleteLocator = async (req: Request, res: Response) => {
@@ -96,7 +96,7 @@ const deleteLocator = async (req: Request, res: Response) => {
 
   await locatorToDelete.destroy();
 
-  res.json({ locator: locatorToDelete });
+  res.json(locatorToDelete);
 };
 
 const locatorController = {

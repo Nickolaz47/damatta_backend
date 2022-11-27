@@ -14,7 +14,7 @@ const getSales = async (req: Request, res: Response) => {
 
   const sales = await Sale.findAll({ where: { UserId: user.id } });
 
-  return res.json({ sales });
+  return res.json(sales);
 };
 
 const getSaleById = async (req: Request, res: Response) => {
@@ -31,7 +31,7 @@ const getSaleById = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Venda não encontrada!"] });
   }
 
-  return res.json({ sale });
+  return res.json(sale);
 };
 
 const createSale = async (req: Request, res: Response) => {
@@ -46,7 +46,7 @@ const createSale = async (req: Request, res: Response) => {
   const sale = { seller, buyer, value, commission, agent, UserId: user.id };
   const newSale = await Sale.create(sale);
 
-  return res.status(201).json({ sale: newSale });
+  return res.status(201).json(newSale);
 };
 
 const updateSale = async (req: Request, res: Response) => {
@@ -66,7 +66,7 @@ const updateSale = async (req: Request, res: Response) => {
 
   await saleToUpdate.update({ seller, buyer, value, commission, agent });
 
-  return res.json({ sale: saleToUpdate });
+  return res.json(saleToUpdate);
 };
 
 const deleteSale = async (req: Request, res: Response) => {
@@ -85,7 +85,7 @@ const deleteSale = async (req: Request, res: Response) => {
 
   await saleToDelete.destroy();
 
-  return res.json({ sale: saleToDelete });
+  return res.json(saleToDelete);
 };
 
 const saleController = {

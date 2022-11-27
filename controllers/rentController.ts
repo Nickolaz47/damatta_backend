@@ -20,7 +20,7 @@ const getRents = async (req: Request, res: Response) => {
   });
   const rents = rentsData.map((rent) => rent.get({ plain: true }));
 
-  return res.json({ rents });
+  return res.json(rents);
 };
 
 const getRentById = async (req: Request, res: Response) => {
@@ -37,7 +37,7 @@ const getRentById = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Aluguel não encontrado!"] });
   }
 
-  return res.json({ rent });
+  return res.json(rent);
 };
 
 const createRent = async (req: Request, res: Response) => {
@@ -72,7 +72,7 @@ const createRent = async (req: Request, res: Response) => {
 
   await locatorExists.update({ rentNumbers });
 
-  return res.status(201).json({ rent: newRent });
+  return res.status(201).json(newRent);
 };
 
 const updateRent = async (req: Request, res: Response) => {
@@ -110,7 +110,7 @@ const updateRent = async (req: Request, res: Response) => {
 
   await rentToUpdate.update({ value, dueDate, payday, LocatorId, RenterId });
 
-  return res.json({ rent: rentToUpdate });
+  return res.json(rentToUpdate);
 };
 
 const deleteRent = async (req: Request, res: Response) => {
@@ -129,7 +129,7 @@ const deleteRent = async (req: Request, res: Response) => {
 
   await rentToDelete.destroy();
 
-  return res.json({ rent: rentToDelete });
+  return res.json(rentToDelete);
 };
 
 const rentController = {

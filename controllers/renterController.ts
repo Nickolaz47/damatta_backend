@@ -17,7 +17,7 @@ const getRenters = async (req: Request, res: Response) => {
     raw: true,
   });
 
-  return res.json({ renters });
+  return res.json(renters);
 };
 
 const getRenterById = async (req: Request, res: Response) => {
@@ -34,7 +34,7 @@ const getRenterById = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
   }
 
-  return res.json({ renter });
+  return res.json(renter);
 };
 
 const createRenter = async (req: Request, res: Response) => {
@@ -49,7 +49,7 @@ const createRenter = async (req: Request, res: Response) => {
   const renter = { name, UserId: user.id };
   const newRenter = await Renter.create(renter);
 
-  return res.status(201).json({ renter: newRenter });
+  return res.status(201).json(newRenter);
 };
 
 const updateRenter = async (req: Request, res: Response) => {
@@ -73,7 +73,7 @@ const updateRenter = async (req: Request, res: Response) => {
 
   const updatedRenter = renterToUpdate;
 
-  return res.json({ renter: updatedRenter });
+  return res.json(updatedRenter);
 };
 
 const deleteRenter = async (req: Request, res: Response) => {
@@ -94,7 +94,7 @@ const deleteRenter = async (req: Request, res: Response) => {
 
   await renterToDelete.destroy();
 
-  return res.json({ renter: renterToDelete });
+  return res.json(renterToDelete);
 };
 
 const renterController = {
