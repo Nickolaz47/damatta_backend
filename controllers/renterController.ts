@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 // Models
 import Renter from "../models/Renter";
+import Rent from "../models/Rent";
 import User from "../models/User";
 
 const getRenters = async (req: Request, res: Response) => {
@@ -90,6 +91,17 @@ const deleteRenter = async (req: Request, res: Response) => {
   });
   if (!renterToDelete) {
     return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
+  }
+
+  const renterHasRent = await Rent.findOne({
+    where: { RenterId: renterToDelete.id },
+  });
+  if (renterHasRent) {
+    return res.status(409).json({
+      errors: [
+        "Inquilino não pode ser deletado pois está associado a um aluguel.",
+      ],
+    });
   }
 
   await renterToDelete.destroy();

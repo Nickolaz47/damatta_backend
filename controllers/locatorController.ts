@@ -94,9 +94,17 @@ const deleteLocator = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Locador não encontrado!"] });
   }
 
+  if (locatorToDelete.rentNumbers > 0) {
+    return res.status(409).json({
+      errors: [
+        "Locador não pode ser deletado pois está associado a um aluguel.",
+      ],
+    });
+  }
+
   await locatorToDelete.destroy();
 
-  res.json(locatorToDelete);
+  return res.json(locatorToDelete);
 };
 
 const locatorController = {
