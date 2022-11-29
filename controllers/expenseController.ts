@@ -91,10 +91,11 @@ const deleteExpense = async (req: Request, res: Response) => {
   return res.json(expenseToDelete);
 };
 
-export const expenseController = {
+const expenseController = {
   getExpenses,
   getExpenseById,
   createExpense,
   updateExpense,
   deleteExpense,
 };
+export default expenseController;
