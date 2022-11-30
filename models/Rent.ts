@@ -1,12 +1,14 @@
 // Connection
 import { DataTypes } from "sequelize";
 import sequelize from "../db/conn";
+// Interface
+import { RentInterface } from "./interfaces/Rent";
 // Models
 import Locator from "./Locator";
 import Renter from "./Renter";
 import User from "./User";
 
-const Rent = sequelize.define("Rent", {
+const Rent = sequelize.define<RentInterface>("Rent", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

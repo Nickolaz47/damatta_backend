@@ -15,4 +15,6 @@ export interface ExpenseInterface
   value: number;
   date: Date;
   UserId: string;
+  createdAt: CreationOptional<Date>;
+  updatedAt: CreationOptional<Date>;
 }

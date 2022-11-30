@@ -25,6 +25,7 @@ import renterRouter from "../routes/renterRouter";
 import saleRouter from "../routes/saleRouter";
 import rentRouter from "../routes/rentRouter";
 import expenseRouter from "../routes/expenseRouter";
+import financeRouter from "../routes/financeRouter";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use("/renters", renterRouter);
 app.use("/sales", saleRouter);
 app.use("/rents", rentRouter);
 app.use("/expenses", expenseRouter);
+app.use("/finance", financeRouter);
 
 const port = config.get<number>("port");
 
