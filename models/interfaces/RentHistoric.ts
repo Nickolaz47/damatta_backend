@@ -13,7 +13,7 @@ export interface RentHistoricInterface
   id: CreationOptional<string>;
   value: number;
   dueDate: Date;
-  payday: Date;
+  payday: Date | null;
   LocatorId: string;
   RenterId: string;
   UserId: string;
