@@ -9,7 +9,7 @@ import Expense from "../models/Expense";
 
 const getBalance = async (req: Request, res: Response) => {
   const { user } = req;
-  
+
   const date = new Date();
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -46,7 +46,11 @@ const getBalance = async (req: Request, res: Response) => {
   });
   const salesTotal = sales.reduce((acc, sale) => acc + sale.commission, 0);
 
-  const balance = { rentsTotal, expensesTotal, salesTotal };
+  const balance = [
+    { name: "Aluguéis", total: rentsTotal },
+    { name: "Vendas", total: salesTotal },
+    { name: "Despesas", total: expensesTotal },
+  ];
 
   return res.json(balance);
 };
