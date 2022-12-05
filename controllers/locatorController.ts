@@ -3,6 +3,8 @@ import { Request, Response } from "express";
 // Models
 import Locator from "../models/Locator";
 import User from "../models/User";
+// Helper
+import titleCase from "../helpers/titleCase";
 
 const getLocators = async (req: Request, res: Response) => {
   const { user } = req;
@@ -46,7 +48,16 @@ const createLocator = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const locator = { name, rentNumbers: 0, UserId: user.id };
+  const standardizedName = titleCase(name);
+
+  const locatorExists = await Locator.findOne({
+    where: { name: standardizedName },
+  });
+  if (locatorExists) {
+    return res.status(409).json({ errors: ["O locador já existe!"] });
+  }
+
+  const locator = { name: standardizedName, rentNumbers: 0, UserId: user.id };
   const newLocator = await Locator.create(locator);
 
   return res.status(201).json(newLocator);

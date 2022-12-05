@@ -4,6 +4,8 @@ import { Request, Response } from "express";
 import Renter from "../models/Renter";
 import Rent from "../models/Rent";
 import User from "../models/User";
+// Helpers
+import titleCase from "../helpers/titleCase";
 
 const getRenters = async (req: Request, res: Response) => {
   const { user } = req;
@@ -45,6 +47,15 @@ const createRenter = async (req: Request, res: Response) => {
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
+  }
+
+  const standardizedName = titleCase(name);
+
+  const renterExists = await Renter.findOne({
+    where: { name: standardizedName },
+  });
+  if (renterExists) {
+    return res.status(209).json({ errors: ["O inquilino já existe!"] });
   }
 
   const renter = { name, UserId: user.id };
