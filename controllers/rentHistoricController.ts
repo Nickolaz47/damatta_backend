@@ -18,16 +18,39 @@ const addedOneMonthToDate = (col: Date) => {
 
 const getRentHistoric = async (req: Request, res: Response) => {
   const { user } = req;
+  const { month, year } = req.query;
+
+  let firstDay = new Date();
+  let lastDay = new Date();
+
+  if (month && year) {
+    firstDay = new Date(Number(year), Number(month), 1);
+    lastDay = new Date(Number(year), Number(month) + 1, 0);
+  }
 
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const rentHistoricData = await RentHistoric.findAll({
-    include: [Locator, Renter],
-    where: { UserId: user.id },
-  });
+  let rentHistoricData: RentHistoricInterface[] = [];
+
+  if (month && year) {
+    rentHistoricData = await RentHistoric.findAll({
+      include: [Locator, Renter],
+      where: {
+        UserId: user.id,
+        dueDate: { [Op.gte]: firstDay, [Op.lte]: lastDay },
+      },
+      order: [[Locator, "name", "ASC"]],
+    });
+  } else {
+    rentHistoricData = await RentHistoric.findAll({
+      include: [Locator, Renter],
+      where: { UserId: user.id },
+      order: [[Locator, "name", "ASC"]],
+    });
+  }
 
   const rentHistoric = rentHistoricData.map((rentHistoric) =>
     rentHistoric.get({ plain: true })
