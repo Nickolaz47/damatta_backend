@@ -63,6 +63,11 @@ const createRent = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
   }
 
+  const rentExists = await Rent.findOne({ where: { LocatorId, RenterId } });
+  if (rentExists) {
+    return res.status(409).json({ errors: ["O aluguel já existe!"] });
+  }
+
   const rent = { value, dueDate, payday, LocatorId, RenterId, UserId: user.id };
   const newRent = await Rent.create(rent);
 
