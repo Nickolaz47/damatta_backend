@@ -6,8 +6,9 @@ import config from "config";
 // Logger
 import Logger from "../config/logger";
 
-const dbName: string = "damatta";
 const env: string = config.get("env");
+const dbName: string =
+  env === "dev" ? config.get("devDbName") : config.get("prodDbName");
 
 const connectionConfig = {
   user:
@@ -22,6 +23,7 @@ const connectionConfig = {
     env === "dev"
       ? config.get<string>("devDbUri")
       : config.get<string>("prodDbUri"),
+  port: env === "dev" ? 0 : config.get<number>("prodDbPort"),
 };
 
 // Criando o banco ou checando sua existência
@@ -30,6 +32,7 @@ mysql
     host: connectionConfig.uri,
     user: connectionConfig.user,
     password: connectionConfig.password,
+    port: connectionConfig.port,
   })
   .then((connection) => {
     connection
