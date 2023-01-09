@@ -22,7 +22,7 @@ const connectionConfig = {
   uri:
     env === "dev"
       ? config.get<string>("devDbUri")
-      : config.get<string>("rdsHostname"),
+      : config.get<string>("rdsHost"),
   port: env === "dev" ? 0 : config.get<number>("rdsPort"),
 };
 
