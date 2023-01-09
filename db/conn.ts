@@ -14,16 +14,16 @@ const connectionConfig = {
   user:
     env === "dev"
       ? config.get<string>("devDbUser")
-      : config.get<string>("prodDbUser"),
+      : config.get<string>("rdsUser"),
   password:
     env === "dev"
       ? config.get<string>("devDbPassword")
-      : config.get<string>("prodDbPassword"),
+      : config.get<string>("rdsPassword"),
   uri:
     env === "dev"
       ? config.get<string>("devDbUri")
-      : config.get<string>("prodDbUri"),
-  port: env === "dev" ? 0 : config.get<number>("prodDbPort"),
+      : config.get<string>("rdsHostname"),
+  port: env === "dev" ? 0 : config.get<number>("rdsPort"),
 };
 
 // Criando o banco ou checando sua existência
