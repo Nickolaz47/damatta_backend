@@ -8,7 +8,7 @@ import Logger from "../config/logger";
 
 const env: string = config.get("env");
 const dbName: string =
-  env === "dev" ? config.get("devDbName") : config.get("prodDbName");
+  env === "dev" ? config.get("devDbName") : config.get("rdsDbName");
 
 const connectionConfig = {
   user:

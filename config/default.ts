@@ -10,7 +10,7 @@ export default {
   devDbUser: process.env.DEV_DB_USER,
   devDbPassword: process.env.DEV_DB_PASSWORD,
   devFrontUrl: process.env.DEV_FRONT_URL,
-  prodDbName: process.env.PROD_DB_NAME,
+  rdsDbName: process.env.RDS_DB_NAME,
   rdsHost: process.env.RDS_HOSTNAME,
   rdsUser: process.env.RDS_USER,
   rdsPassword: process.env.RDS_PASSWORD,
