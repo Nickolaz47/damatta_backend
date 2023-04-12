@@ -5,7 +5,6 @@ services:
     image: mysql:latest
     volumes:
       - db_data:/var/lib/mysql
-    restart: always
     env_file:
       - .env.dev
     ports:
@@ -14,9 +13,11 @@ services:
       - backend
 
   api:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: .
     depends_on: 
       - db
-    build: .
     restart: always
     ports:
       - "3001:3001"
@@ -26,6 +27,6 @@ services:
       - backend
 
 volumes: 
-  db_data: {} # Compose inicia um volume pra app
-networks: # Definindo uma rede ao invés de usar a criada pelo Compose
+  db_data: {} 
+networks: 
   backend:
