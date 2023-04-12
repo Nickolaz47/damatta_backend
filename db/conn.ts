@@ -23,7 +23,7 @@ const connectionConfig = {
     env === "dev"
       ? config.get<string>("devDbUri")
       : config.get<string>("rdsHost"),
-  port: env === "dev" ? 0 : config.get<number>("rdsPort"),
+  port: config.get<number>("rdsPort"),
 };
 
 // Criando o banco ou checando sua existência

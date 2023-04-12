@@ -12,7 +12,7 @@ export default {
   devFrontUrl: process.env.DEV_FRONT_URL,
   rdsDbName: process.env.RDS_DB_NAME,
   rdsHost: process.env.RDS_HOSTNAME,
-  rdsUser: process.env.RDS_USER,
+  rdsUser: process.env.RDS_USERNAME,
   rdsPassword: process.env.RDS_PASSWORD,
   rdsPort: process.env.RDS_PORT,
   prodFrontUrl: process.env.PROD_FRONT_URL,

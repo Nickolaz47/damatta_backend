@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env.dev
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+  api:
+    depends_on: 
+      - db
+    build: .
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env.dev
+    networks:
+      - backend
+
+volumes: 
+  db_data: {} # Compose inicia um volume pra app
+networks: # Definindo uma rede ao invés de usar a criada pelo Compose
+  backend:
