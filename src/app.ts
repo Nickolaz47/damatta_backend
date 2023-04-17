@@ -31,8 +31,13 @@ import healthRouter from "../routes/healthRouter";
 
 const app = express();
 
+const front_url: string =
+  config.get("env") === "dev"
+    ? config.get("devFrontUrl")
+    : config.get("prodFrontUrl");
+
 app.use(express.json());
-app.use(cors({ origin: config.get("devFrontUrl"), credentials: true }));
+app.use(cors({ origin: front_url, credentials: true }));
 app.use(cookieParser());
 app.use(morganMiddleware);
 
