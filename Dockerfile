@@ -2,11 +2,11 @@ FROM node
 
 WORKDIR /app
 
-COPY package*.json /app
+COPY ./damatta_backend/package*.json /app/
 
 RUN npm install 
 
-COPY . .
+COPY ./damatta_backend /app/
 
 ENV PORT=${PORT}
 ENV ENV=${ENV}

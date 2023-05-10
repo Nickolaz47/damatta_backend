@@ -18,16 +18,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morganMiddleware from "../middlewares/morgan";
 // Routes
-import authRouter from "../routes/authRouter";
-import tokenRouter from "../routes/tokenRouter";
-import locatorRouter from "../routes/locatorRouter";
-import renterRouter from "../routes/renterRouter";
-import saleRouter from "../routes/saleRouter";
-import rentRouter from "../routes/rentRouter";
-import expenseRouter from "../routes/expenseRouter";
-import financeRouter from "../routes/financeRouter";
-import rentHistoricRouter from "../routes/rentHistoricRouter";
-import healthRouter from "../routes/healthRouter";
+import apiRouter from "../routes/apiRouter";
 
 const app = express();
 
@@ -41,16 +32,7 @@ app.use(cors({ origin: front_url, credentials: true }));
 app.use(cookieParser());
 app.use(morganMiddleware);
 
-app.use("/", authRouter);
-app.use("/token", tokenRouter);
-app.use("/locators", locatorRouter);
-app.use("/renters", renterRouter);
-app.use("/sales", saleRouter);
-app.use("/rents", rentRouter);
-app.use("/expenses", expenseRouter);
-app.use("/finance", financeRouter);
-app.use("/rentHistoric", rentHistoricRouter);
-app.use("/health", healthRouter);
+app.use("/api", apiRouter);
 
 const port = config.get<number>("port");
 
