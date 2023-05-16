@@ -18,6 +18,7 @@ const getRenters = async (req: Request, res: Response) => {
   const renters = await Renter.findAll({
     where: { UserId: user.id },
     raw: true,
+    order: [['name', 'ASC']]
   });
 
   return res.json(renters);
@@ -58,7 +59,7 @@ const createRenter = async (req: Request, res: Response) => {
     return res.status(209).json({ errors: ["O inquilino já existe!"] });
   }
 
-  const renter = { name, UserId: user.id };
+  const renter = { name: standardizedName, UserId: user.id };
   const newRenter = await Renter.create(renter);
 
   return res.status(201).json(newRenter);
@@ -81,7 +82,7 @@ const updateRenter = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Inquilino não encontrado!"] });
   }
 
-  await renterToUpdate.update({ name });
+  await renterToUpdate.update({ name: titleCase(name) });
 
   const updatedRenter = renterToUpdate;
 

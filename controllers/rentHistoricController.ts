@@ -11,9 +11,9 @@ import User from "../models/User";
 import { Op } from "sequelize";
 
 const addedOneMonthToDate = (col: Date) => {
-  return new Date(col.toString()).setMonth(
-    new Date(col.toString()).getMonth() + 1
-  );
+  const newDate = new Date(col);
+  newDate.setUTCMonth(newDate.getUTCMonth() + 1);
+  return newDate;
 };
 
 const getRentHistoric = async (req: Request, res: Response) => {
@@ -69,7 +69,12 @@ const createRentHistoric = async (req: Request, res: Response) => {
 
   const rents = await Rent.findAll({
     include: [Locator, Renter],
-    where: { UserId: user.id, payday: { [Op.ne]: "" } },
+    where: {
+      UserId: user.id,
+      payday: {
+        [Op.ne]: null,
+      },
+    },
     attributes: { exclude: ["createdAt", "updatedAt"] },
     raw: true,
   });

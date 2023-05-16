@@ -17,6 +17,7 @@ const getRents = async (req: Request, res: Response) => {
   const rentsData = await Rent.findAll({
     include: [Locator, Renter],
     where: { UserId: user.id },
+    order: [[Locator, 'name', 'ASC']] 
   });
   const rents = rentsData.map((rent) => rent.get({ plain: true }));
 
@@ -84,7 +85,7 @@ const updateRent = async (req: Request, res: Response) => {
   const { user } = req;
   const { id } = req.params;
   const { value, dueDate, payday, LocatorId, RenterId } = req.body;
-  console.log(user);
+
   const userExists = await User.findOne({ where: { id: user.id } });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });

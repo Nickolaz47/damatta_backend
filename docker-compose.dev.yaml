@@ -2,11 +2,12 @@ version: "3.7"
 
 services:
   db:
+    restart: always
     image: mysql:latest
     volumes:
       - db_data:/var/lib/mysql
     env_file:
-      - .env.dev
+      - dev.env
     ports:
       - "3306:3306"
     networks:
@@ -22,7 +23,7 @@ services:
     ports:
       - "3001:3001"
     env_file:
-      - .env.dev
+      - dev.env
     networks:
       - backend
 

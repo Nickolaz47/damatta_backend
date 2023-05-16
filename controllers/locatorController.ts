@@ -17,6 +17,7 @@ const getLocators = async (req: Request, res: Response) => {
   const locators = await Locator.findAll({
     where: { UserId: user.id },
     raw: true,
+    order: [['name', 'ASC']]
   });
 
   return res.json(locators);
@@ -81,7 +82,7 @@ const updateLocator = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Locador não encontrado!"] });
   }
 
-  await locatorToUpdate.update({ name });
+  await locatorToUpdate.update({ name: titleCase(name) });
 
   const updatedLocator = locatorToUpdate;
 
