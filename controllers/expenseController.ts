@@ -7,12 +7,17 @@ import User from "../models/User";
 const getExpenses = async (req: Request, res: Response) => {
   const { user } = req;
 
-  const userExists = await User.findOne({ where: { id: user.id } });
+  const userExists = await User.findOne({
+    where: { id: user.id },
+  });
   if (!userExists) {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const expenses = await Expense.findAll({ where: { UserId: user.id } });
+  const expenses = await Expense.findAll({
+    where: { UserId: user.id },
+    order: [["date", "DESC"]],
+  });
   return res.json(expenses);
 };
 

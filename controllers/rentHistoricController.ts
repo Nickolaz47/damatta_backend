@@ -42,7 +42,10 @@ const getRentHistoric = async (req: Request, res: Response) => {
         UserId: user.id,
         dueDate: { [Op.gte]: firstDay, [Op.lte]: lastDay },
       },
-      order: [[Locator, "name", "ASC"]],
+      order: [
+        ["dueDate", "DESC"],
+        [Locator, "name", "ASC"],
+      ],
     });
   } else {
     rentHistoricData = await RentHistoric.findAll({

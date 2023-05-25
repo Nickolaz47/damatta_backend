@@ -17,7 +17,7 @@ const getRents = async (req: Request, res: Response) => {
   const rentsData = await Rent.findAll({
     include: [Locator, Renter],
     where: { UserId: user.id },
-    order: [[Locator, 'name', 'ASC']] 
+    order: [[Renter, "name", "ASC"]],
   });
   const rents = rentsData.map((rent) => rent.get({ plain: true }));
 
@@ -134,6 +134,19 @@ const deleteRent = async (req: Request, res: Response) => {
   }
 
   await rentToDelete.destroy();
+
+  const locatorExists = await Locator.findOne({
+    where: { id: rentToDelete.LocatorId },
+  });
+  if (!locatorExists) {
+    return res.status(404).json({ errors: ["Locador não encontrado!"] });
+  }
+
+  const rentNumbers = await Rent.count({
+    where: { UserId: user.id, LocatorId: locatorExists.id },
+  });
+
+  await locatorExists.update({ rentNumbers });
 
   return res.json(rentToDelete);
 };

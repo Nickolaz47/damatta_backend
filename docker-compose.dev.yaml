@@ -24,6 +24,8 @@ services:
       - "3001:3001"
     env_file:
       - dev.env
+    volumes:
+      - /Users/nicolasdamatta/Desktop/Coding/damatta/damatta_backend:/app
     networks:
       - backend
 

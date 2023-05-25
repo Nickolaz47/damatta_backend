@@ -12,7 +12,10 @@ const getSales = async (req: Request, res: Response) => {
     return res.status(404).json({ errors: ["Usuário não encontrado!"] });
   }
 
-  const sales = await Sale.findAll({ where: { UserId: user.id } });
+  const sales = await Sale.findAll({
+    where: { UserId: user.id },
+    order: [["date", "DESC"]],
+  });
 
   return res.json(sales);
 };
